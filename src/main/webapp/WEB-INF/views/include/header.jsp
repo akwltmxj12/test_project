@@ -84,7 +84,8 @@
 	 </div>
 	 <div>
 	 	<div class="text-white">
-	 		&nbsp; &nbsp; 시스템 이용시간: <span id="timerDiv"></span>
+	 		&nbsp; &nbsp; 시스템 이용시간: <span id="timerDiv"></span> <input type="button" value="연장" onclick="script:resetTime()">
+	 	
 	 	</div>
 	 </div>
   </div>
@@ -96,8 +97,7 @@ var timeCounter = function(elem, initSecond){
     if(!(this instanceof timeCounter)){
         return new timeCounter(elem, initSecond);
     }
-var svTime = '<%= session.getAttribute("loginTime") %>';
-    
+    var svTime = '<%= session.getAttribute("loginTime") %>';    
     console.log(svTime);
     
     this.elem = elem;
@@ -115,10 +115,10 @@ timeCounter.prototype = {
         this.initTime = 0;
         this.si = -1;
         clearInterval(this.si);
-        this.print("00:00");       
-        <% session.invalidate(); %>
+		sessionStorage.removeItem("hspId");	//세션아이디 지우기
         alert("접속시간만료되었습니다. 다시 로그인하세요.")	
-        window.location = "/login";            
+        window.location = "/login";  
+
     },
     resume: function(){
         if(this.si > -1){
@@ -153,6 +153,11 @@ timeCounter.prototype = {
         $("#"+this.elem).html(elapsed);
     },
   }
+function resetTime() {
+	timerDiv = 10;
+	tempSec = tempMin * 60;
+}
+  
 </script>
 
 <script type="text/javascript">
@@ -163,15 +168,6 @@ timeViewer.start();
 </script>
 
 
-<!--  
-<script>
-function expireSession()
-{
- alert("접속시간만료되었습니다. 다시 로그인하세요.")	
-  window.location = "/login";
-}
-</script>
--->
 
 </body>
 </html>

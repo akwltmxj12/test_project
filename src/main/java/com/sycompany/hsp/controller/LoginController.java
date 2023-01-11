@@ -71,10 +71,8 @@ public class LoginController {
 		} else { // 있는 아이디
 			
 			session.setAttribute("hspId", hspId); // 로그인 한 세션에 아이디
-			
 			Long loginTime = System.currentTimeMillis()/1000;//현재시간(밀리세컨드) 추출해서 / 1000 
 	        session.setAttribute("loginTime", loginTime);
-	        
 			String sessionId = session.getAttribute("hspId").toString();
 			HspInfoDto hspInfoDto = main.getHspInfo(sessionId);
 			model.addAttribute("hspInfo", hspInfoDto);
