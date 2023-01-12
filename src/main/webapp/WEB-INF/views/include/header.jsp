@@ -154,7 +154,7 @@ timeCounter.prototype = {
     },
   }
 function resetTime() {
-	timerDiv = 10;
+	tempMin = 10;
 	tempSec = tempMin * 60;
 }
   
@@ -162,7 +162,7 @@ function resetTime() {
 
 <script type="text/javascript">
 $(document).ready(function() { 
-var timeViewer = timeCounter("timerDiv", 3600);
+var timeViewer = timeCounter("timerDiv", 10);
 timeViewer.start();
 });
 </script>
